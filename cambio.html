@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moedas</title>
+
+    <!--=============== FONT GOOGLE ===============-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="style.css">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="ri-coins-fill"></i> Conversor de Moedas</h1>
+            <p>Taxas em tempo real</p>
+        </div>
+
+        <div class="converter">
+            <div class="input-group">
+                <label for="amount"><i class="ri-cash-fill"></i>  Valor:</label>
+                <input type="number" id="amount" placeholder="Digite o valor" step="0.01" min="0">
+            </div>
+
+            <div class="currency-selectors">
+                <div class="input-group">
+                    <label for="fromCurrency"><i class="ri-arrow-up-fill"></i> De:</label>
+                    <select id="fromCurrency">
+                        <option value="USD">Dólar Americano (USD)</option>
+                        <option value="BRL">Real Brasileiro (BRL)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="GBP">Libra Esterlina (GBP)</option>
+                        <option value="JPY">Iene Japonês (JPY)</option>
+                        <option value="CNY">Yuan Chinês (CNY)</option>
+                        <option value="ARS">Peso Argentino (ARS)</option>
+                        <option value="CAD">Dólar Canadense (CAD)</option>
+                    </select>
+                </div>
+
+                <div class="swap-container">
+                    <div class="swap-btn" id="swapButton">
+                        <span>⇄</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="toCurrency"><i class="ri-arrow-down-fill"></i>Para:</label>
+                    <select id="toCurrency">
+                        <option value="BRL">Real Brasileiro (BRL)</option>
+                        <option value="USD">Dólar Americano (USD)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="GBP">Libra Esterlina (GBP)</option>
+                        <option value="JPY">Iene Japonês (JPY)</option>
+                        <option value="CNY">Yuan Chinês (CNY)</option>
+                        <option value="ARS">Peso Argentino (ARS)</option>
+                        <option value="CAD">Dólar Canadense (CAD)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="convert-btn" id="convertButton">Converter</button>
+
+            <div class="result" id="result">
+                <div class="result-value" id="resultValue">0.00</div>
+                <div class="rate-info" id="rateInfo"></div>
+            </div>
+        </div>
+
+        <div class="update-info">
+            <p id="updateTime">Última atualização: --/--/---- --:--</p>
+            <a href="https://www.exchangerate-api.com">API de taxas por Exchange Rate API</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
