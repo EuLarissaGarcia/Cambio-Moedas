@@ -1,41 +1,41 @@
-// Variáveis globais
+
 let exchangeRates = {};
 let lastUpdate = null;
 let currentBaseCurrency = 'USD';
 
-// Inicializa o conversor quando a página carrega
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeConverter();
 });
 
 function initializeConverter() {
-    // Carrega as taxas de câmbio com USD como padrão inicial
+   
     loadExchangeRates(currentBaseCurrency);
     
-    // Configura os event listeners
+   
     setupEventListeners();
 }
 
 function setupEventListeners() {
-    // Converte quando o botão é clicado
+    
     document.querySelector('.convert-btn').addEventListener('click', convertCurrency);
     
-    // Converte quando pressionar Enter no campo de valor
+    
     document.getElementById('amount').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') convertCurrency();
     });
     
-    // Atualiza quando a moeda de origem muda
+   
     document.getElementById('fromCurrency').addEventListener('change', handleCurrencyChange);
     
-    // Atualiza quando a moeda de destino muda
+    
     document.getElementById('toCurrency').addEventListener('change', function() {
         if (document.getElementById('amount').value.trim()) {
             convertCurrency();
         }
     });
     
-    // Configura o botão de troca - Usando o onclick do HTML
+   
     document.querySelector('.swap-btn').onclick = swapCurrencies;
 }
 
@@ -96,12 +96,12 @@ function convertCurrency() {
             return;
         }
         
-        // Verifica se as taxas estão disponíveis
+        
         if (!exchangeRates[toCurrency]) {
             throw new Error('Taxas de câmbio não disponíveis para a moeda de destino');
         }
         
-        // Cálculo da taxa
+        
         let rate;
         if (currentBaseCurrency === fromCurrency) {
             rate = exchangeRates[toCurrency];
@@ -113,7 +113,7 @@ function convertCurrency() {
         
         const convertedAmount = amount * rate;
         
-        // Exibe o resultado formatado
+       
         document.getElementById('resultValue').textContent = convertedAmount.toLocaleString('pt-BR', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
@@ -130,28 +130,27 @@ function convertCurrency() {
 }
 
 function swapCurrencies() {
-    // Obtém os elementos select
+    
     const fromSelect = document.getElementById('fromCurrency');
     const toSelect = document.getElementById('toCurrency');
     
-    // Armazena os valores atuais
+    
     const fromValue = fromSelect.value;
     const toValue = toSelect.value;
     
-    // Método forçado para garantir a atualização visual:
-    // 1. Criar novos selects com os valores trocados
+    
     const newFromSelect = fromSelect.cloneNode(true);
     const newToSelect = toSelect.cloneNode(true);
     
-    // 2. Definir os valores trocados
+    
     newFromSelect.value = toValue;
     newToSelect.value = fromValue;
     
-    // 3. Substituir os selects antigos pelos novos
+    
     fromSelect.parentNode.replaceChild(newFromSelect, fromSelect);
     toSelect.parentNode.replaceChild(newToSelect, toSelect);
     
-    // 4. Reconfigurar os event listeners para os novos selects
+    
     newFromSelect.addEventListener('change', handleCurrencyChange);
     newToSelect.addEventListener('change', function() {
         if (document.getElementById('amount').value.trim()) {
@@ -159,18 +158,18 @@ function swapCurrencies() {
         }
     });
     
-    // 5. Atualizar taxas se necessário
+    
     if (newFromSelect.value !== currentBaseCurrency) {
         loadExchangeRates(newFromSelect.value);
     } else if (document.getElementById('amount').value.trim()) {
         convertCurrency();
     }
     
-    return false; // Previne comportamento padrão
+    return false; 
 }
 
 function updateUI() {
-    // Atualiza a data da última atualização
+    
     if (lastUpdate) {
         const options = {
             day: '2-digit',
